@@ -1,24 +1,27 @@
-const express = require('express');
+const router = require("express").Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Users = require('../users/users-model');
 
-const router = express();
+// const router = express().Router()
 
 // POST /api/auth/register Endpoint - FUNCTIONAL
 router.post('/register', (req, res) => {
-  const user = req.body;
-
-  if (user.username && user.password) {
+  let user = req.body;
+  const validateResult = validateUser(user);
+   if (validateResult.isSuccessful === true) {
+  // if (user.username && user.password) {
     const hash = bcrypt.hashSync(user.password, 12);
 
     user.password = hash;
 
     Users.add(user)
       .then(saved => {
-        const token = generateToken(user);
-        res.status(201).json({ user: saved, token });
+        // const token = generateToken(user);
+        // res.status(201).json({ user: saved, token });
+         res.status(201).json(saved);
+
       })
       .catch(err => {
         res.status(500).json(err);
@@ -26,7 +29,10 @@ router.post('/register', (req, res) => {
   } else {
     res
       .status(400)
-      .json({ message: 'Please provide registration information' });
+      .json({
+        message: "Please provide registration information",
+        errors: validateResult.errors
+      });
   }
 });
 
@@ -44,7 +50,7 @@ router.post('/login', (req, res) => {
             message: `Welcome, ${user.username}! You're logged in!`,
             username: user.username,
             role: user.role,
-            country_id: user.country_id,
+            provider_id: user.provider_id,
             token,
           });
         } else {
@@ -63,13 +69,30 @@ function generateToken(user) {
   const payload = {
     subject: user.id,
     username: user.username,
-    country_id: user.country_id,
+    provider_id: user.provider_id,
     role: user.role,
   };
   const options = {
     expiresIn: '1d',
   };
   return jwt.sign(payload, process.env.JWT_SECRET, options);
+}
+
+function validateUser(user) {
+  let errors = [];
+
+  if (!user.username || user.username.length < 2) {
+    errors.push("Please include a username with at least 2 characters");
+  }
+
+  if (!user.password || user.password.length < 4) {
+    errors.push("Please include a password with at least 4 characters");
+  }
+
+  return {
+    isSuccessful: errors.length > 0 ? false : true,
+    errors
+  };
 }
 
 module.exports = router;

@@ -1,12 +1,12 @@
 exports.up = function(knex) {
   return knex.schema
-    .createTable('provider', tbl => {
+    .createTable("provider", tbl => {
       tbl.increments();
       tbl
         .string('name', 128)
         .notNullable()
         .unique();
-        provider.timestamps(true, true);  
+      
     })
     .createTable('immunization', tbl => {
       tbl.increments();
@@ -19,7 +19,7 @@ exports.up = function(knex) {
         .inTable("provider")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
-        immunization.timestamps(true, true);
+       
     })
     .createTable('children', tbl => {
       tbl.increments();
@@ -44,7 +44,7 @@ exports.up = function(knex) {
         .inTable("provider")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
-        children.timestamps(true, true);  
+      
 
     })
     .createTable('screenings', tbl => {

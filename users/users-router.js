@@ -7,7 +7,7 @@ const router = express.Router();
 // GET /api/users Endpoint
 router.get('/', (req, res) => {
   const { subject, username, role } = req.decodedToken;
-
+console.log('subject..',subject)
   if (role === 'admin') {
     Users.find()
       .then(users => {
