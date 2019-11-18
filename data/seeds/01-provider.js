@@ -1,7 +1,7 @@
 exports.seed = function(knex) {
   return knex("provider").insert([
-    { name: "Gregory House MD"},
-    { name: "Doogie Howser MD"},
-    { name: "Stephen Strange MD"}
+    { ProviderName: "Gregory House MD" },
+    { ProviderName: "Doogie Howser MD" },
+    { ProviderName: "Stephen Strange MD" }
   ]);
 };

@@ -1,6 +1,6 @@
 const express = require('express');
 
-const Communities = require('./immunization-model');
+const Immunization = require("./immunization-model");
 const Children = require('../child/child-model');
 
 const router = express.Router();
@@ -11,7 +11,7 @@ const router = express.Router();
 
 // GET /api/immunization endpoint to Retrieve immunization - FUNCTIONAL
 router.get('/', (req, res) => {
-  Communities.find()
+  Immunization.find()
     .then(immunization => {
       res.status(200).json(immunization);
     })
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 // GET /api/immunization/:id endpoint to Retrieve immunization by ID - FUNCTIONAL
 router.get('/:id', (req, res) => {
   // console.log(req.params.id);
-  Communities.findById(req.params.id)
+  Immunization.findById(req.params.id)
     .then(community => {
       if (community) {
         res.status(200).json(community);

@@ -14,7 +14,7 @@ function find() {
     .join("provider", "provider.id", "immunization.provider_id")
     .select(
       "immunization.id as immunization_id",
-      "immunization.name",
+      "immunization.immunizationName",
       "provider.name"
     );
 }
@@ -24,8 +24,8 @@ function findById(id) {
     .join("provider", "provider.id", "immunization.provider_id")
     .select(
       "immunization.id",
-      "immunization.name",
-      "provider.name",
+      "immunization.immunizationName",
+      "provider.providerName",
       "immunization.provider_id"
     )
     .where("immunization.id", id)
@@ -43,8 +43,8 @@ function findChildren(id) {
       "children.contact",
       "children.gender",
       "children.DOB",
-      "provider.name",
-      "immunization.name"
+      "provider.providerName",
+      "immunization.immunizationName"
     )
     .where({ immunization_id: id });
 }

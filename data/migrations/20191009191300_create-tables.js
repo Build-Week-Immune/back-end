@@ -3,14 +3,14 @@ exports.up = function(knex) {
     .createTable("provider", tbl => {
       tbl.increments();
       tbl
-        .string('name', 128)
+        .string('ProviderName', 128)
         .notNullable()
         .unique();
       
     })
     .createTable('immunization', tbl => {
       tbl.increments();
-      tbl.string('name', 128).notNullable();
+      tbl.string('ImmunizationName', 128).notNullable();
       tbl
         .integer("provider_id")
         .unsigned()

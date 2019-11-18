@@ -22,7 +22,7 @@ function findById(id) {
 function findCommunities(id) {
   return db("immunization")
     .join("provider", "provider.id", "immunization.provider_id")
-    .select("immunization.id", "immunization.name", "provider.name")
+    .select("immunization.id", "immunization.immunizationName", "provider.providerName")
     .where({ provider_id: id });
 }
 

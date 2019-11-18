@@ -13,6 +13,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
   Children.find()
     .then(children => {
+      console.log(children.DOB)
       res.status(200).json(children);
     })
     .catch(err => {
@@ -39,6 +40,23 @@ router.get('/:id', (req, res) => {
 });
 
 // PUT /api/children/:id endpoint to Update a child -
+// ADD /api/children/ endpoint to Update a child -
+router.post("/", (req, res) => {
+  const name = req.body;
+
+  if (name.name) {
+    Provider.add(name)
+      .then(saved => {
+        res.status(201).json({ added: saved });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ message: "Error adding new child" });
+      });
+  } else {
+    res.status(400).json({ message: "Please provide child data" });
+  }
+});
 
 // DELETE /api/children/:id endpoint to Delete a child - FUNCTIONAL
 router.delete('/:id', (req, res) => {
