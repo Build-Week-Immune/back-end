@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken');
+const secret=process.env.JWT_SECRET || "This is my secret"
 
 module.exports = function restricted(req, res, next) {
   const token = req.headers.authorization;
 
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+    jwt.verify(token, secret, (err, decodedToken) => {
       if (err) {
         res.status(401).json({ message: 'Not verified' });
       } else {
-        req.decodedToken = decodedToken;
+        req.decodedJwt = decodedToken;
         next();
       }
     });

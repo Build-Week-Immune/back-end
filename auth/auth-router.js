@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const secret = process.env.JWT_SECRET || "This is my secret";
 const Users = require('../users/users-model');
 
 // const router = express().Router()
@@ -9,18 +9,19 @@ const Users = require('../users/users-model');
 // POST /api/auth/register Endpoint - FUNCTIONAL
 router.post('/register', (req, res) => {
   let user = req.body;
-  const validateResult = validateUser(user);
-   if (validateResult.isSuccessful === true) {
-  // if (user.username && user.password) {
+   const validateResult = validateUser(user);
+  //  if (validateResult.isSuccessful === true) {
+  if (user.username && user.password) {
     const hash = bcrypt.hashSync(user.password, 12);
 
     user.password = hash;
 
     Users.add(user)
       .then(saved => {
-        // const token = generateToken(user);
-        // res.status(201).json({ user: saved, token });
-         res.status(201).json(saved);
+        console.log('saved..',saved)
+        const token = generateToken(user);
+         res.status(201).json({ user: saved,token });
+          // res.status(201).json(saved);
 
       })
       .catch(err => {
@@ -31,7 +32,7 @@ router.post('/register', (req, res) => {
       .status(400)
       .json({
         message: "Please provide registration information",
-        errors: validateResult.errors
+        // errors: validateResult.errors
       });
   }
 });
@@ -67,15 +68,15 @@ router.post('/login', (req, res) => {
 
 function generateToken(user) {
   const payload = {
-    subject: user.id,
+     subject: user.id,
     username: user.username,
     provider_id: user.provider_id,
-    role: user.role,
+     role: user.role,
   };
   const options = {
     expiresIn: '1d',
   };
-  return jwt.sign(payload, process.env.JWT_SECRET, options);
+  return jwt.sign(payload, secret, options);
 }
 
 function validateUser(user) {

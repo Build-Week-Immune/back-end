@@ -11,7 +11,7 @@ const router = express.Router();
 
 // CRUD Endpoints
 
-// GET /api/countries endpoint to Retrieve countries - FUNCTIONAL
+// GET /api/provider endpoint to Retrieve providers - FUNCTIONAL
 router.get('/', (req, res) => {
   Countries.find()
     .then(provider => {
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
     });
 });
 
-// GET /api/countries/:id endpoint to Retrieve country by ID - FUNCTIONAL
+// GET /api/provider/:id endpoint to Retrieve provider by ID - FUNCTIONAL
 router.get('/:id',  (req, res) => {
   Countries.findById(req.params.id)
     .then(country => {
@@ -41,7 +41,7 @@ router.get('/:id',  (req, res) => {
     });
 });
 
-// POST /api/countries endpoint to Create a new country - FUNCTIONAL
+// POST /api/provider endpoint to Create a new provider - FUNCTIONAL
 router.post('/',(req, res) => {
   const name = req.body;
 
@@ -59,9 +59,9 @@ router.post('/',(req, res) => {
   }
 });
 
-// PUT /api/countries/:id endpoint to Update a provider- NOT ESSENTIAL
+// PUT /api/provider/:id endpoint to Update a provider- NOT ESSENTIAL
 
-// DELETE /api/countries/:id endpoint to Delete a provider - FUNCTIONAL
+// DELETE /api/provider/:id endpoint to Delete a provider - FUNCTIONAL
 router.delete('/:id',  (req, res) => {
   Countries.remove(req.params.id)
     .then(count => {
@@ -77,7 +77,7 @@ router.delete('/:id',  (req, res) => {
     });
 });
 
-// GET /api/countries/:id/communities to Retrieve immunization by provider- FUNCTIONAL
+// GET /api/provider/:id/immunization to Retrieve immunization by provider- FUNCTIONAL
 router.get('/:id/communities', (req, res) => {
   Countries.findCommunities(req.params.id)
     .then(immunization => {
@@ -91,15 +91,15 @@ router.get('/:id/communities', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ message: "Failed to get communities" });
+      res.status(500).json({ message: "Failed to get immunization" });
     });
 });
 
-// POST /api/countries/:id/communities to Create a new immunization by provider - FUNCTIONAL
-router.post('/:id/communities',  (req, res) => {
+// POST /api/countries/:id/immunization to Create a new immunization by provider - FUNCTIONAL
+router.post("/:id/immunization", (req, res) => {
   const name = req.body;
   name.provider_id = req.params.id;
-  // console.log(community);
+  // console.log(name);
 
   if (name.name) {
     Communities.add(name)
@@ -108,10 +108,10 @@ router.post('/:id/communities',  (req, res) => {
       })
       .catch(err => {
         console.log(err);
-        res.status(500).json({ message: 'Error adding new community' });
+        res.status(500).json({ message: "Error adding new immunization" });
       });
   } else {
-    res.status(400).json({ message: 'Please provide community name' });
+    res.status(400).json({ message: "Please provide immunization name" });
   }
 });
 

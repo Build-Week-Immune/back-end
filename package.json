@@ -3,21 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
+   "scripts": {
     "server": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "cross-env DB_ENV=testing jest --verbose --watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jonathan-YungHsin-Ho/bw3-backend.git"
+    "url": "https://github.com/Build-Week-Immune"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Jonathan-YungHsin-Ho/bw3-backend/issues"
+    "url": "https://github.com/Build-Week-Immune/back-end/issues"
   },
-  "homepage": "https://github.com/Jonathan-YungHsin-Ho/bw3-backend#readme",
+  "homepage": "https://github.com/Build-Week-Immune/back-end/blob/master/README.md",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-session-knex": "^1.4.0",
@@ -33,6 +34,13 @@
     "sqlite3": "^4.1.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "cross-env": "^6.0.3",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvirnoment": "node"
   }
 }
+

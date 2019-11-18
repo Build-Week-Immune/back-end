@@ -1,5 +1,5 @@
 const express = require('express');
-
+// const rest=require("../auth/restricted-middleware")
 const Users = require('./users-model');
 
 const router = express.Router();
@@ -7,8 +7,8 @@ const router = express.Router();
 // GET /api/users Endpoint
 router.get('/', (req, res) => {
   const { subject, username, role } = req.decodedToken;
-console.log('subject..',subject)
-  if (role === 'admin') {
+
+   if (role === 'admin') {
     Users.find()
       .then(users => {
         res.json({ loggedInUser: username, users });

@@ -9,7 +9,7 @@ const router = express.Router();
 
 // CRUD Endpoints
 
-// GET /api/communities endpoint to Retrieve immunization - FUNCTIONAL
+// GET /api/immunization endpoint to Retrieve immunization - FUNCTIONAL
 router.get('/', (req, res) => {
   Communities.find()
     .then(immunization => {
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
     });
 });
 
-// GET /api/communities/:id endpoint to Retrieve immunization by ID - FUNCTIONAL
+// GET /api/immunization/:id endpoint to Retrieve immunization by ID - FUNCTIONAL
 router.get('/:id', (req, res) => {
   // console.log(req.params.id);
   Communities.findById(req.params.id)
@@ -40,9 +40,9 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// PUT /api/communities/:id endpoint to Update a immunization- NOT ESSENTIAL
+// PUT /api/immunization/:id endpoint to Update a immunization- NOT ESSENTIAL
 
-// DELETE /api/communities/:id endpoint to Delete a immunization - FUNCTIONAL
+// DELETE /api/immunization/:id endpoint to Delete a immunization - FUNCTIONAL
 router.delete('/:id', (req, res) => {
   Communities.remove(req.params.id)
     .then(count => {
@@ -58,7 +58,7 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-// GET /api/communities/:id/children endpoint to Retrieve children by immunization - FUNCTIONAL
+// GET /api/immunization/:id/children endpoint to Retrieve children by immunization - FUNCTIONAL
 router.get('/:id/children', (req, res) => {
   Communities.findChildren(req.params.id)
     .then(children => {
@@ -76,7 +76,7 @@ router.get('/:id/children', (req, res) => {
     });
 });
 
-// POST /api/communities/:id/children to Add child by immunization - FUNCTIONAL
+// POST /api/immunization/:id/children to Add child by immunization - FUNCTIONAL
 router.post('/:id/children', (req, res) => {
   const child = req.body;
   child.immunization_id = req.params.id;

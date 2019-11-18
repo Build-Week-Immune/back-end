@@ -64,7 +64,7 @@ router.get('/:id/screenings', (req, res) => {
         res.status(200).json(screenings);
       } else {
         res.status(404).json({
-          message: 'Could not find find screenings for given country',
+          message: 'Could not find find screenings for given provider',
         });
       }
     })

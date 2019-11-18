@@ -21,12 +21,12 @@ server.use(express.json());
 server.use(cors());
 
 server.use('/api/auth', AuthRouter);
-server.use('/api/users', restricted, UserRouter);
+server.use('/api/users',restricted,  UserRouter);
 
 server.use("/api/provider", ProviderRouter);
-server.use("/api/immunization", immunizationRouter);
-server.use('/api/children',  ChildRouter);
-server.use('/api/screenings', ScreeningRouter);
+server.use("/api/immunization",restricted, immunizationRouter);
+server.use('/api/children',restricted,  ChildRouter);
+server.use('/api/screenings',restricted, ScreeningRouter);
 
 server.get('/', (req, res) => {
   res.send(`<h2>Hello world from build-immunization-tracking Back End!</h2>`);
