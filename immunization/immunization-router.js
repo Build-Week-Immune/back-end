@@ -40,6 +40,16 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.post("/", async (req, res) => {
+  try {
+    const trip = await Immunization.add(req.body);
+    res.status(200).json(trip);
+  } catch (error) {
+    res.status(500).json({
+      message: "Bummer. Error adding the Immunization"
+    });
+  }
+});
 // PUT /api/immunization/:id endpoint to Update a immunization
 
 router.put("/:id", async (req, res) => {
