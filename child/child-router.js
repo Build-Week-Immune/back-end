@@ -40,22 +40,31 @@ router.get('/:id', (req, res) => {
 });
 
 // PUT /api/children/:id endpoint to Update a child -
-// ADD /api/children/ endpoint to Update a child -
-router.post("/", (req, res) => {
-  const name = req.body;
 
-  if (name.name) {
-    Provider.add(name)
+router.put("/:id", async (req, res) => {
+  try {
+    const trip = await Children.update(req.params.id, req.body);
+    if (trip) {
+      res.status(200).json(trip);
+    } else {
+      res.status(404).json({ message: "Uh-oh! children could not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Bummer. Error updating the children" });
+  }
+});
+
+// POST /api/children/ endpoint to Update a child -
+router.post("/", (req, res) => {
+  const screening = req.body;
+    Children.add(screening)
       .then(saved => {
         res.status(201).json({ added: saved });
       })
       .catch(err => {
         console.log(err);
-        res.status(500).json({ message: "Error adding new child" });
+        res.status(500).json({ message: "Error adding new screening" });
       });
-  } else {
-    res.status(400).json({ message: "Please provide child data" });
-  }
 });
 
 // DELETE /api/children/:id endpoint to Delete a child - FUNCTIONAL

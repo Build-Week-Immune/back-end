@@ -6,7 +6,7 @@ exports.up = function(knex) {
         .string('ProviderName', 128)
         .notNullable()
         .unique();
-      
+       tbl.timestamps(true, true);
     })
     .createTable('immunization', tbl => {
       tbl.increments();
@@ -19,7 +19,7 @@ exports.up = function(knex) {
         .inTable("provider")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
-       
+        tbl.timestamps(true, true);
     })
     .createTable('children', tbl => {
       tbl.increments();
@@ -44,7 +44,7 @@ exports.up = function(knex) {
         .inTable("provider")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
-      
+       tbl.timestamps(true, true);
 
     })
     .createTable('screenings', tbl => {
@@ -60,6 +60,7 @@ exports.up = function(knex) {
         .inTable('children')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
+         tbl.timestamps(true, true);
     });
 };
 

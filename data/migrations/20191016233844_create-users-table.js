@@ -14,6 +14,7 @@ exports.up = function(knex) {
       .inTable("provider")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
+       tbl.timestamps(true, true);
   });
 };
 

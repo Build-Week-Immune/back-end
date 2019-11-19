@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 });
 
 // GET /api/provider/:id endpoint to Retrieve provider by ID - FUNCTIONAL
-router.get('/:id',  (req, res) => {
+router.get('/:id',restricted,  (req, res) => {
    Provider.findById(req.params.id)
      .then(country => {
        if (country) {
@@ -42,27 +42,41 @@ router.get('/:id',  (req, res) => {
 });
 
 // POST /api/provider endpoint to Create a new provider - FUNCTIONAL
-router.post('/',(req, res) => {
-  const name = req.body;
+// router.post('/',restricted,(req, res) => {
+//   const name = req.body;
 
-  if (name.name) {
-    Provider.add(name)
-      .then(saved => {
-        res.status(201).json({ added: saved });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json({ message: "Error adding new provider" });
-      });
-  } else {
-    res.status(400).json({ message: "Please provide provider name" });
+//   if (name.name) {
+//     Provider.add(name)
+//       .then(saved => {
+//         res.status(201).json({ added: saved });
+//       })
+//       .catch(err => {
+//         console.log(err);
+//         res.status(500).json({ message: "Error adding new provider" });
+//       });
+//   } else {
+//     res.status(400).json({ message: "Please provide provider name" });
+//   }
+// });
+
+// PUT /api/provider/:id endpoint to Update a provider- 
+
+router.put("/:id", async (req, res) => {
+  try {
+    const trip = await Provider.update(req.params.id, req.body);
+    if (trip) {
+      res.status(200).json(trip);
+    } else {
+      res.status(404).json({ message: "Uh-oh! provider could not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Bummer. Error updating the provider" });
   }
 });
 
-// PUT /api/provider/:id endpoint to Update a provider- NOT ESSENTIAL
 
 // DELETE /api/provider/:id endpoint to Delete a provider - FUNCTIONAL
-router.delete('/:id',  (req, res) => {
+router.delete('/:id',restricted,  (req, res) => {
    Provider.remove(req.params.id)
      .then(count => {
        if (count) {
@@ -95,8 +109,8 @@ router.get('/:id/communities', (req, res) => {
      });
 });
 
-// POST /api/countries/:id/immunization to Create a new immunization by provider - FUNCTIONAL
-router.post("/:id/immunization", (req, res) => {
+// POST /api/provider/:id/immunization to Create a new immunization by provider - FUNCTIONAL
+router.post("/:id/immunization",restricted, (req, res) => {
   const name = req.body;
   name.provider_id = req.params.id;
   // console.log(name);
@@ -114,7 +128,16 @@ router.post("/:id/immunization", (req, res) => {
     res.status(400).json({ message: "Please provide immunization name" });
   }
 });
-
+router.post("/", async (req, res) => {
+  try {
+    const trip = await Provider.add(req.body);
+    res.status(200).json(trip);
+  } catch (error) {
+    res.status(500).json({
+      message: "Bummer. Error adding the trip"
+    });
+  }
+});
 // **********************************************************************
 
 module.exports = router;

@@ -40,11 +40,26 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// PUT /api/immunization/:id endpoint to Update a immunization- NOT ESSENTIAL
+// PUT /api/immunization/:id endpoint to Update a immunization
+
+router.put("/:id", async (req, res) => {
+  try {
+    const trip = await Immunization.update(req.params.id, req.body);
+    if (trip) {
+      res.status(200).json(trip);
+    } else {
+      res.status(404).json({ message: "Uh-oh! immunization could not found" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Bummer. Error updating the immunization" });
+  }
+});
 
 // DELETE /api/immunization/:id endpoint to Delete a immunization - FUNCTIONAL
 router.delete('/:id', (req, res) => {
-  Communities.remove(req.params.id)
+  Immunization.remove(req.params.id)
     .then(count => {
       if (count) {
         res.status(200).json({ message: "The immunization has ben deleted" });
@@ -60,7 +75,7 @@ router.delete('/:id', (req, res) => {
 
 // GET /api/immunization/:id/children endpoint to Retrieve children by immunization - FUNCTIONAL
 router.get('/:id/children', (req, res) => {
-  Communities.findChildren(req.params.id)
+  Immunization.findChildren(req.params.id)
     .then(children => {
       if (children.length) {
         res.status(200).json(children);
@@ -72,7 +87,7 @@ router.get('/:id/children', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ message: 'Failed to get children' });
+      res.status(500).json({ message: "Failed to get children" });
     });
 });
 

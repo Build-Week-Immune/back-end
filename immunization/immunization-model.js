@@ -5,18 +5,18 @@ module.exports = {
   findById,
   findChildren,
   add,
-  // update,
+  update,
   remove,
 };
 
 function find() {
   return db("immunization")
-    .join("provider", "provider.id", "immunization.provider_id")
-    .select(
-      "immunization.id as immunization_id",
-      "immunization.immunizationName",
-      "provider.name"
-    );
+    // .join("provider", "provider.id", "immunization.provider_id")
+    // .select(
+    //   "immunization.id as immunization_id",
+    //   "immunization.immunizationName",
+    //   "provider.name"
+    // );
 }
 
 function findById(id) {
@@ -59,6 +59,12 @@ function add(name) {
 }
 
 // function update() {}
+function update(id, changes) {
+  return db("immunization")
+    .where("id", id)
+    .update(changes)
+    .then(count => (count > 0 ? this.get(id) : null));
+}
 
 function remove(id) {
   return db("immunization")

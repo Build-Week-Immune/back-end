@@ -9,7 +9,7 @@ const Users = require('../users/users-model');
 // POST /api/auth/register Endpoint - FUNCTIONAL
 router.post('/register', (req, res) => {
   let user = req.body;
-   const validateResult = validateUser(user);
+  //  const validateResult = validateUser(user);
   //  if (validateResult.isSuccessful === true) {
   if (user.username && user.password) {
     const hash = bcrypt.hashSync(user.password, 12);

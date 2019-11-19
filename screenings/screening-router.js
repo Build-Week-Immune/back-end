@@ -42,6 +42,21 @@ router.get("/:id", (req, res) => {
 
 // PUT /api/screenings/:id endpoint to Update a screening - NOT ESSENTIAL
 
+
+// Post /api/screenings/ endpoint to Update a screening 
+router.post("/", (req, res) => {
+  const screening = req.body;
+  Screenings.add(screening)
+    .then(saved => {
+      res.status(201).json({ added: saved });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: "Error adding new screening" });
+    });
+});
+
+
 // DELETE /api/screenings/:id endpoint to Delete a screening -
 router.delete('/:id', (req, res) => {
   Screenings.remove(req.params.id)
