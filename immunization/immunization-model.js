@@ -57,6 +57,11 @@ function add(name) {
       return findById(id);
     });
 }
+// async function add(trip) {
+//   const [id] = await db("immunization").insert(trip);
+
+//   return findById(id);
+// }
 
 // function update() {}
 function update(id, changes) {
