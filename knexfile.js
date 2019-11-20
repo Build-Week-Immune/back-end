@@ -2,49 +2,51 @@
 
 module.exports = {
   development: {
-    client: 'sqlite3',
+    client: "sqlite3",
     connection: {
-      filename: './data/immundatabase.db3',
+      filename: "./data/immundatabase.db3"
     },
     useNullAsDefault: true,
     pool: {
       afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-      },
+        conn.run("PRAGMA foreign_keys = ON", done);
+      }
     },
     migrations: {
+      directory: "./data/migrations"
+    },
+    seeds: {
+      directory: "./data/seeds"
+    }
+  },
+
+  testing: {
+    client: "sqlite3",
+    connection: {
+      filename: "./data/my_db"
+    },
+    useNullAsDefault: true,
+   migrations: {
       directory: './data/migrations',
     },
     seeds: {
       directory: './data/seeds',
     },
-  },
-
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password',
-    },
-  
-    migrations: {
-      tableName: 'knex_migrations',
-    },
+    
   },
 
   production: {
-    client: 'pg',
+    client: "pg",
     connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
-      max: 10,
+      max: 10
     },
     migrations: {
-      directory: './data/migrations',
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: './data/seeds',
-    },
-  },
+      directory: "./data/seeds"
+    }
+  }
 };

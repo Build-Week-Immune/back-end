@@ -32,12 +32,12 @@ router.get('/:id',restricted,  (req, res) => {
        } else {
          res
            .status(404)
-           .json({ message: "Could not find country with given ID" });
+           .json({ message: "Could not find provider with given ID" });
        }
      })
      .catch(err => {
        console.log(err);
-       res.status(500).json({ message: "Failed to get country" });
+       res.status(500).json({ message: "Failed to get provider" });
      });
 });
 
@@ -80,33 +80,33 @@ router.delete('/:id',restricted,  (req, res) => {
    Provider.remove(req.params.id)
      .then(count => {
        if (count) {
-         res.status(200).json({ message: "The country has been deleted" });
+         res.status(200).json({ message: "The provider has been deleted" });
        } else {
-         res.status(404).json({ message: "Invalid country ID" });
+         res.status(404).json({ message: "Invalid provider ID" });
        }
      })
      .catch(err => {
        console.log(err);
-       res.status(500).json({ message: "Error deleting the country" });
+       res.status(500).json({ message: "Error deleting the provider" });
      });
 });
 
 // GET /api/provider/:id/immunization to Retrieve immunization by provider- FUNCTIONAL
-router.get('/:id/communities', (req, res) => {
-   Provider.findCommunities(req.params.id)
-     .then(immunization => {
-       if (immunization.length) {
-         res.status(200).json(immunization);
-       } else {
-         res.status(404).json({
-           message: "Could not find find immunization for given provider"
-         });
-       }
-     })
-     .catch(err => {
-       console.log(err);
-       res.status(500).json({ message: "Failed to get immunization" });
-     });
+router.get("/:id/immunization", (req, res) => {
+  Provider.findCommunities(req.params.id)
+    .then(immunization => {
+      if (immunization.length) {
+        res.status(200).json(immunization);
+      } else {
+        res.status(404).json({
+          message: "Could not find find immunization for given provider"
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: "Failed to get immunization" });
+    });
 });
 
 // POST /api/provider/:id/immunization to Create a new immunization by provider - FUNCTIONAL
@@ -134,7 +134,7 @@ router.post("/", async (req, res) => {
     res.status(200).json(trip);
   } catch (error) {
     res.status(500).json({
-      message: "Bummer. Error adding the trip"
+      message: "Bummer. Error adding the provider"
     });
   }
 });

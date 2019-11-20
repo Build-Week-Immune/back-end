@@ -46,13 +46,13 @@ https://immunazation.herokuapp.com
 AUTHORIZATION ROUTES
 POST to /api/auth/register
 
-expects  username, password, and role in the req.body
+expects  username, password, and role(admin,user) in the req.body
 POST to /api/auth/login
 
 expects username and password in the req.body,
 outputs a token and welcome message
 
-USER ROUTES:
+USER(patient) ROUTES:
 
 GET to /api/users
 
@@ -77,7 +77,7 @@ outputs provider object by id
 POST to /api/provider
 
 expects token for authorization
-ADD provider object 
+ADD provider() object 
 
 PUT to /api/provider/:ID
 
@@ -88,6 +88,10 @@ DELETE /api/provider/:id
 
 expects token for authorization
 DELETE provider object 
+
+GET /api/provider/:id/immunization 
+
+ Retrieve immunization by provider
 
 Immunization routs..
 
