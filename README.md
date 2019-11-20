@@ -99,7 +99,7 @@ outputs an array of all immunization
 
 POST to /api/immunization
 
-expects token for authorization
+expects(ImmunizationName,providerid) token for authorization
 ADD immunization object to a specifid provider id
 
 PUT to /api/immunization/:ID
@@ -126,7 +126,8 @@ outputs children  object by id
 
 POST to /api/children
 
-expects token for authorization
+expects(immunizationid,
+			  providerid) token for authorization
 ADD children object by specifying immunization and provider id
 
 DELETE /api/children/:id

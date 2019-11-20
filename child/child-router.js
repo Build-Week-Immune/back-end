@@ -63,7 +63,7 @@ router.post("/", (req, res) => {
       })
       .catch(err => {
         console.log(err);
-        res.status(500).json({ message: "Error adding new screening" });
+        res.status(500).json({ message: "Error adding new child" });
       });
 });
 
