@@ -59,6 +59,23 @@ GET to /api/users
 expects token for authorization
 outputs an array of users
 
+GET to /api/users/:id
+
+expects token for authorization
+outputs users object by id
+
+PUT to /api/users/:ID
+
+expects token for authorization
+UPDATE users object 
+
+DELETE /api/users/:id
+
+expects token for authorization
+DELETE users object
+
+
+
 
 
 
