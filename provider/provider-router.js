@@ -93,21 +93,21 @@ router.delete('/:id',restricted,  (req, res) => {
 
 // GET /api/provider/:id/immunization to Retrieve immunization by provider- FUNCTIONAL
 router.get("/:id/immunization", (req, res) => {
-  Provider.findCommunities(req.params.id)
-    .then(immunization => {
-      if (immunization.length) {
-        res.status(200).json(immunization);
-      } else {
-        res.status(404).json({
-          message: "Could not find find immunization for given provider"
-        });
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ message: "Failed to get immunization" });
-    });
-});
+Provider.findCommunities(req.params.id)
+  .then(immunization => {
+    if (immunization.length) {
+      res.status(200).json(immunization);
+    } else {
+      res.status(404).json({
+        message: "Could not find find immunization for given provider"
+      });
+    }
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({ message: "Failed to get immunization" });
+  });
+})
 
 // POST /api/provider/:id/immunization to Create a new immunization by provider - FUNCTIONAL
 router.post("/:id/immunization",restricted, (req, res) => {

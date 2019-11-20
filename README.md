@@ -77,7 +77,7 @@ outputs provider object by id
 POST to /api/provider
 
 expects token for authorization
-ADD provider() object 
+ADD provider(providerName) object 
 
 PUT to /api/provider/:ID
 
@@ -89,9 +89,6 @@ DELETE /api/provider/:id
 expects token for authorization
 DELETE provider object 
 
-GET /api/provider/:id/immunization 
-
- Retrieve immunization by provider
 
 Immunization routs..
 
