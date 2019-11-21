@@ -43,6 +43,21 @@ router.get("/:id", (req, res) => {
 // PUT /api/screenings/:id endpoint to Update a screening - NOT ESSENTIAL
 
 
+router.put("/:id", async (req, res) => {
+  try {
+    const trip = await Screenings.update(req.params.id, req.body);
+    if (trip) {
+      res.status(200).json(trip);
+    } else {
+      res.status(404).json({ message: "Uh-oh! immunization could not found" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Bummer. Error updating the immunization" });
+  }
+});
+
 // Post /api/screenings/ endpoint to Update a screening 
 router.post("/", (req, res) => {
   const screening = req.body;
@@ -55,6 +70,8 @@ router.post("/", (req, res) => {
       res.status(500).json({ message: "Error adding new screening" });
     });
 });
+
+// PUT /api/immunization/:id endpoint to Update a immunization
 
 
 // DELETE /api/screenings/:id endpoint to Delete a screening -

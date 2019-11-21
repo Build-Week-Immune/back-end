@@ -3,10 +3,10 @@ const db = require('../data/dbConfig');
 module.exports = {
   find,
   findById,
-  findCommunities,
+  findimmunization,
   add,
-   update,
-  remove,
+  update,
+  remove
 };
 
 function find() {
@@ -19,10 +19,14 @@ function findById(id) {
     .first();
 }
 
-function findCommunities(id) {
+function findimmunization(id) {
   return db("immunization")
     .join("provider", "provider.id", "immunization.provider_id")
-    .select("immunization.id", "immunization.immunizationName", "provider.providerName")
+    .select(
+      "immunization.id",
+      "immunization.immunizationName",
+      "provider.providerName"
+    )
     .where({ provider_id: id });
 }
 

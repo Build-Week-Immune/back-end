@@ -60,9 +60,9 @@ function findScreenings(id) {
     .where({ child_id: id });
 }
 
-function add(child) {
+function add(name) {
   return db('children')
-    .insert(child, 'id')
+    .insert(name, 'id')
     .then(ids => {
       const [id] = ids;
       return findById(id);

@@ -4,7 +4,7 @@ module.exports = {
   find,
   findById,
   add,
-  // update,
+  update,
   remove,
 };
 
@@ -28,6 +28,13 @@ function add(screening) {
 }
 
 // function update() {}
+
+function update(id, changes) {
+  return db("screenings")
+    .where("id", id)
+    .update(changes);
+  // .then(count => (count > 0 ? this.get(id) : null));
+}
 
 function remove(id) {
   return db('screenings')

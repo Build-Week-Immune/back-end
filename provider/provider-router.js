@@ -93,7 +93,7 @@ router.delete('/:id',restricted,  (req, res) => {
 
 // GET /api/provider/:id/immunization to Retrieve immunization by provider- FUNCTIONAL
 router.get("/:id/immunization", (req, res) => {
-Provider.findCommunities(req.params.id)
+Provider.findimmunization(req.params.id)
   .then(immunization => {
     if (immunization.length) {
       res.status(200).json(immunization);
