@@ -14,7 +14,7 @@ exports.up = function(knex) {
       tbl
         .integer("provider_id")
         .unsigned()
-        .notNullable()
+        // .notNullable()
         .references("id")
         .inTable("provider")
         .onUpdate("CASCADE")
@@ -31,7 +31,7 @@ exports.up = function(knex) {
       tbl
         .integer("immunization_id")
         .unsigned()
-        .notNullable()
+        // .notNullable()
         .references("id")
         .inTable("immunization")
         .onUpdate("CASCADE")
@@ -39,7 +39,7 @@ exports.up = function(knex) {
       tbl
         .integer("provider_id")
         .unsigned()
-        .notNullable()
+        // .notNullable()
         .references("id")
         .inTable("provider")
         .onUpdate("CASCADE")
@@ -55,7 +55,7 @@ exports.up = function(knex) {
       tbl
         .integer('child_id')
         .unsigned()
-        .notNullable()
+        // .notNullable()
         .references('id')
         .inTable('children')
         .onUpdate('CASCADE')
