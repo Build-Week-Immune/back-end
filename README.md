@@ -135,11 +135,75 @@ GET /api/children
 
 expects token for authorization
 outputs an array of all children
+sample output
+[
+  {
+    "id": 1,
+    "name": "Jane",
+    "parent_name": "Mrs. Doe",
+    "contact": "mrs.doe@gmail.com",
+    "gender": "F",
+    "DOB": "09/28/2010",
+    "immunization_id": 1,
+    "provider_id": 1
+  },
+  {
+    "id": 2,
+    "name": "Jose",
+    "parent_name": "Mr. Machado",
+    "contact": "machado@email.com",
+    "gender": "M",
+    "DOB": "09/28/2010",
+    "immunization_id": 1,
+    "provider_id": 1
+  },
+
 
 GET to /api/children /:id
 
 expects token for authorization
 outputs children  object by id
+sample output:
+{
+  "id": 3,
+  "name": "Paulo",
+  "parent_name": "Ms. Moreno",
+  "contact": "moreno@email.com",
+  "gender": "M",
+  "DOB": "09/28/2010",
+  "ProviderName": "Gregory House MD",
+  "provider_id": 1,
+  "ImmunizationName": "DTaP - Diphtheria, tetanus, and acellular pertussis",
+  "immunization_id": 2,
+  "screenings": [
+    {
+      "id": 7,
+      "date": "04/12/2010",
+      "height": 22.5,
+      "weight": 26.5,
+      "name": "Paulo"
+    },
+    {
+      "id": 8,
+      "date": "05/12/2010",
+      "height": 23,
+      "weight": 30.1,
+      "name": "Paulo"
+    },
+    {
+      "id": 9,
+      "date": "10/05/2011",
+      "height": 25.1,
+      "weight": 35.4,
+      "name": "Paulo"
+    }
+  ]
+}
+
+GET /api/children/:id/screenings
+
+expects token for authorization
+outputs a child visit records by id
 
 POST to /api/children
 
