@@ -29,7 +29,7 @@ describe("POST /api/auth/register", () => {
         role: "user"
       });
 
-    expect(auth.type).toMatch(i/json/i);
+    expect(auth.type).toMatch(/json/i);
   });
 });
 

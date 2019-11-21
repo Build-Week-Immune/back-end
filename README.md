@@ -200,6 +200,8 @@ sample output:
   ]
 }
 
+PUT /api/children/:id endpoint to Update a child -
+
 GET /api/children/:id/screenings
 
 expects token for authorization
