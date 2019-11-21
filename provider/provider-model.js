@@ -40,7 +40,7 @@ function update(id, changes) {
   return db("provider")
     .where("id", id)
     .update(changes)
-    .then(count => (count > 0 ? this.get(id) : null));
+    // .then(count => (count > 0 ? this.get(id) : null));
 }
 function remove(id) {
   return db("provider")
