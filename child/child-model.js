@@ -20,20 +20,20 @@ function find() {
 function findById(id) {
   const promises = [
     db("children")
-      .join("provider", "provider.id", "children.provider_id")
-      .join("immunization", "immunization.id", "children.immunization_id")
-      .select(
-        "children.id",
-        "children.name",
-        "children.parent_name",
-        "children.contact",
-        "children.gender",
-        "children.DOB",
-        "provider.providerName",
-        "children.provider_id",
-        "immunization.immunizationName",
-        "children.immunization_id"
-      )
+      // .join("provider", "provider.id", "children.provider_id")
+      // .join("immunization", "immunization.id", "children.immunization_id")
+      // .select(
+      //   "children.id",
+      //   "children.name",
+      //   "children.parent_name",
+      //   "children.contact",
+      //   "children.gender",
+      //   "children.DOB",
+      //   "provider.providerName",
+      //   "children.provider_id",
+      //   "immunization.immunizationName",
+      //   "children.immunization_id"
+      // )
       .where("children.id", id)
       .first(),
     findScreenings(id)

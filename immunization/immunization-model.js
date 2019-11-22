@@ -21,13 +21,13 @@ function find() {
 
 function findById(id) {
   return db("immunization")
-    .join("provider", "provider.id", "immunization.provider_id")
-    .select(
-      "immunization.id",
-      "immunization.immunizationName",
-      "provider.providerName",
-      "immunization.provider_id"
-    )
+    // .join("provider", "provider.id", "immunization.provider_id")
+    // .select(
+    //   "immunization.id",
+    //   "immunization.immunizationName",
+    //   "provider.providerName",
+    //   "immunization.provider_id"
+    // )
     .where("immunization.id", id)
     .first();
 }
